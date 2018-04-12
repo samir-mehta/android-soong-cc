@@ -1,0 +1,47 @@
+cc_defaults {
+    name: "device-defaults",
+}
+
+device_defaults {
+    name: "device-defaults-flags",
+}
+
+cc_library_shared {
+    name: "libclientdevice",
+    defaults: [ "device-defaults", "device-defaults-flags", ],
+    srcs: [
+        "device1.cpp",
+        "device2.cpp",
+    ],
+    shared_libs: [
+        "liblog",
+        "libcutils",
+        "libutils",
+        "libbinder",
+    ],
+    export_shared_lib_headers: ["libbinder"],
+    include_dirs: ["..."],
+    local_include_dirs: ["..."],
+    header_libs: ["..."],
+    export_header_lib_headers: ["..."],
+
+    // for memory heap analysis
+    static_libs: [
+        "libc_malloc_debug_backtrace",
+    ],
+    cflags: [
+        "-Wall",
+        "-Werror",
+        "-Wno-error=deprecated-declarations",
+    ],
+    sanitize: {
+        misc_undefined : [
+            "unsigned-integer-overflow",
+            "signed-integer-overflow",
+        ],
+    },
+}
+
+subdirs = [
+    "soong",
+]

@@ -1,0 +1,19 @@
+// Author: Samir Mehta
+// Email: getsamir.mehta@gmail.com
+
+bootstrap_go_package {
+    name: "soong-operator",
+    pkgPath: "android/soong/path_to_your_package_or_library",
+    deps: [
+        "blueprint",
+        "blueprint-pathtools",
+        "soong",
+        "soong-android",
+        "soong-cc",
+        "soong-genrule",
+    ],
+    srcs: [
+        "device.go",
+    ],
+    pluginFor: ["soong_build"],
+}
